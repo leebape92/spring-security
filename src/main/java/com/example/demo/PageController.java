@@ -46,4 +46,10 @@ public class PageController {
         return "main";
     }
     
+    @GetMapping("/public")
+    public void test() {
+    	System.out.println("@@@@@@@@@@@@@@@@@2");
+    }
+    
+    
 }

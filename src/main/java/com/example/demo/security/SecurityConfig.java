@@ -20,6 +20,7 @@ public class SecurityConfig {
 
 	private final CustomLoginFailureHandler failureHandler; 
 	private final CustomLoginSuccessHandler successHandler;
+//	private final PreLoginFilter preLoginFilter;
 
     //Authentication : 인증
     //Authorization  : 인가
@@ -31,7 +32,7 @@ public class SecurityConfig {
 	        .csrf(csrf -> csrf.disable()) // CSRF 보호 비활성화 (학습용, 실제 서비스에서는 활성화 필요)
 	        
 	        .authorizeHttpRequests(auth -> auth
-	            .requestMatchers("/public/**", "/login0001", "/regist", "/api/**", "/security-session-info").permitAll() // 인증 없이 접근 허용
+	            .requestMatchers("/public/**", "/user/**", "/login0001", "/regist", "/api/**", "/security-session-info").permitAll() // 인증 없이 접근 허용
 	            .anyRequest().authenticated() // 그 외 모든 요청은 로그인(인증) 필요
 	        )
 	        
@@ -62,7 +63,7 @@ public class SecurityConfig {
 	                .sessionRegistry(sessionRegistry()) // 동시 로그인 제한 및 세션 관리용
 	        )
 	        
-	        .addFilterBefore(new PreLoginFilter(), UsernamePasswordAuthenticationFilter.class) // 로그인 전에 동작할 커스텀 필터
+//	        .addFilterBefore(preLoginFilter, UsernamePasswordAuthenticationFilter.class) // 로그인 전에 동작할 커스텀 필터
 	        
 	        .build(); // SecurityFilterChain 빌드
 	}

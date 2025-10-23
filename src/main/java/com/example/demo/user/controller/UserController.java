@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.user.dto.UserDTO;
-//import com.example.demo.config.exception.ErrorResponse;
-import com.example.demo.user.entity.UserEntity;
 import com.example.demo.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -23,13 +21,14 @@ public class UserController {
 
 	private final UserService userService;
 	
-	@GetMapping("/findUserList")
+	@GetMapping("/getUserList")
 	public ResponseEntity<List<UserDTO>> getUserList() {
+		System.out.println("@@@@@@@@@@@2");
         List<UserDTO> findUserList = userService.getUserList();
         return ResponseEntity.ok(findUserList);
 	}
 	
-	@GetMapping("/findUser")
+	@GetMapping("/getUser")
 	public ResponseEntity<UserDTO> getUser(@RequestBody UserDTO userDTO) {
         UserDTO findUser = userService.getUser(userDTO);
         return ResponseEntity.ok(findUser);

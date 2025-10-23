@@ -21,12 +21,13 @@ public class PreLoginFilter extends OncePerRequestFilter {
 
     	
     	
-    	System.out.println("[PreLoginFilter] 로그인 시도");
+    	
 
     	
         // 로그인 POST 요청만 처리
         if ("/login".equals(request.getServletPath()) && "POST".equalsIgnoreCase(request.getMethod())) {
-            System.out.println("로그인 시도 전 커스텀 필터 실행!");
+        	System.out.println("[PreLoginFilter] 로그인 시도");
+        	System.out.println("로그인 시도 전 커스텀 필터 실행!");
             
             // 예: IP 체크, CAPTCHA 검증, 요청 로깅 등 추가 가능
             String clientIp = request.getRemoteAddr();

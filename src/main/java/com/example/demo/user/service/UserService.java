@@ -2,9 +2,8 @@ package com.example.demo.user.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.user.dto.UserDTO;
@@ -18,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 	
 	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
+    
 	
 	//Stream 방식
 //    public List<UserDTO> findUserList() {
@@ -59,10 +60,13 @@ public class UserService {
     }
     
     public void saveUser(UserDTO userDTO) {
+    	System.out.println("userDTO ::: " + userDTO);
+    	
     	UserEntity userEntity = new UserEntity();
     	userEntity.setUsername(userDTO.getUsername());
-    	userEntity.setPassword(userDTO.getPassword());
+    	userEntity.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         userRepository.save(userEntity);
+        System.out.println("User saved");
     }
 	
 
