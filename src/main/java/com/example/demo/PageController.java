@@ -42,8 +42,9 @@ public class PageController {
     
     @GetMapping("/main")
     public String mainPage(@AuthenticationPrincipal CustomUserDetails user, Model model) {
+    	System.out.println("/main 컨트롤러**********************8");
         model.addAttribute("username", user.getUsername());
-        return "main";
+        return "main/main";
     }
     
     @GetMapping("/public")

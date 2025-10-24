@@ -48,7 +48,11 @@ public class SecurityConfig {
 	        
 	        .logout(logout -> logout
 	            .logoutUrl("/logout") // 로그아웃 요청 URL
-	            .logoutSuccessUrl("/login0001?logout=true") // 로그아웃 성공 시 이동 페이지
+//	            .logoutSuccessUrl("/login0001?logout=false") // 로그아웃 성공 시 이동 페이지
+	            .logoutSuccessHandler((request, response, authentication) -> { // authentication 로그인한 유저 정보 스프링 시큐리티가 전달
+	                request.getSession().setAttribute("logoutMessage", "로그아웃 되었습니다.");
+	                response.sendRedirect("/login0001");
+	            })
 	            .invalidateHttpSession(true) // 세션 무효화
 	            .deleteCookies("JSESSIONID") // 브라우저 쿠키 제거
 	            .permitAll() // 로그아웃 URL은 인증 없이 접근 가능

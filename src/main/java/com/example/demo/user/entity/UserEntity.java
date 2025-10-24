@@ -34,6 +34,8 @@ public class UserEntity {
 
     private String role;
 
+    //boolean = 0 : false, 1 : true
+    
     // 계정 잠김 여부
     @Column(nullable = false)
     private boolean locked = false;

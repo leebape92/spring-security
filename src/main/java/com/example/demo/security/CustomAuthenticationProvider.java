@@ -28,8 +28,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@");
         System.out.println("[CustomAuthenticationProvider] 인증 시도 - username=" + username);
         
-        
-
         // DB에서 사용자 조회 (없으면 UsernameNotFoundException 발생)
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         System.out.println("[CustomAuthenticationProvider] DB 조회 완료 - userDetails=" + userDetails.getUsername());
@@ -43,10 +41,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         }
 
         // 계정 상태 검증
+        // 1 : true -> 잠기지 않음 , 2 : false -> 잠김
         if (!userDetails.isAccountNonLocked()) {
             System.err.println("[CustomAuthenticationProvider] 계정 잠김 - username=" + username);
             throw new LockedException("계정이 잠겨 있습니다.");
         }
+        
+        // 계정 활성화
+        // 1 : true -> 활성화
         if (!userDetails.isEnabled()) {
             System.err.println("[CustomAuthenticationProvider] 계정 비활성화 - username=" + username);
             throw new DisabledException("계정이 비활성화 되어 있습니다.");
@@ -55,6 +57,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         System.out.println("[CustomAuthenticationProvider] 인증 성공 - username=" + username);
 
         // 인증 성공 시 Authentication 반환
+        System.out.println("userDetails::: " + userDetails);
         return new UsernamePasswordAuthenticationToken(
                 userDetails,
                 null, // 인증 후 패스워드 제거
