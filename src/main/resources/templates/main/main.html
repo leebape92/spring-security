@@ -5,7 +5,11 @@
 </head>
 <body>
     <h1>MAIN</h1>
-
+		
+		
+<div th:if="${username}">
+    <h3 th:text="${username + '님 환영합니다.'}"></h3>
+</div>
 		<!-- Spring Security 기본 logout은 POST로 보냄 + CSRF 토큰 필요 -->
 		 <form action="/logout" method="post" style="margin-top:18px;">
 		   <button type="submit" class="btn btn-logout">로그아웃</button>

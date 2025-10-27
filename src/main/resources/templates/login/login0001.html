@@ -27,9 +27,9 @@
 <!-- 	    <p style="color:red;">로그아웃. 다시 로그인해주세요.</p> -->
 <!-- 	</div> -->
 	
-	<div th:if="${session.logoutMessage}">
-	    <p style="color:red;" th:text="${session.logoutMessage}"></p>
-		<th:block th:remove="all" th:text="${#session.removeAttribute('logoutMessage')}"></th:block>
+	
+	<div th:if="${logoutMessage}">
+	    <p style="color:red;" th:text="${logoutMessage}"></p>
 	</div>
 	
 

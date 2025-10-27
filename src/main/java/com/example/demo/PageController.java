@@ -36,7 +36,18 @@ public class PageController {
             // 한 번 읽은 후 세션에서 제거
             request.getSession().removeAttribute("loginErrorMessage");
         }
-    	
+        
+        // 로그아웃 메시지 처리
+        String logoutMessagetest = (String) request.getSession().getAttribute("logoutMessage123");
+        System.out.println("logoutMessagetest ::: " + logoutMessagetest);
+        
+        String logoutMessage = (String) request.getSession().getAttribute("logoutMessage");
+        System.out.println("logoutMessage ::: " + logoutMessage);
+        if (logoutMessage != null) {
+            model.addAttribute("logoutMessage", logoutMessage);
+            request.getSession().removeAttribute("logoutMessage"); // ✅ 여기서 삭제
+        }
+        
         return "login/login0001"; // 
     }
     
@@ -46,11 +57,4 @@ public class PageController {
         model.addAttribute("username", user.getUsername());
         return "main/main";
     }
-    
-    @GetMapping("/public")
-    public void test() {
-    	System.out.println("@@@@@@@@@@@@@@@@@2");
-    }
-    
-    
 }
